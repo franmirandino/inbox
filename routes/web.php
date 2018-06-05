@@ -14,4 +14,6 @@
 Auth::routes();
 
 
-Route::resource('vendedores', 'sellerController');
+Route::resource('funcionarios', 'OfficialController');
+
+Route::get('officials/getData', 'OfficialController@datosOfficial')->name('officials/getData');

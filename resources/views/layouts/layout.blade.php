@@ -27,6 +27,8 @@
     <link rel="shortcut icon" href="/dashboard/img/favicon.ico">
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+
+    
     <!-- Tweaks for older IEs--><!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
@@ -50,7 +52,7 @@
           <ul id="side-main-menu" class="side-menu list-unstyled">                                         
             <li class="active"><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="fas fa-address-card"></i>Funcionarios </a>
               <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
-                <li><a href="{{ route('vendedores.index') }}">Vendedores</a></li>
+                <li><a href="#">Vendedores</a></li>
                 <li><a href="#">Técnicos</a></li>
               </ul>
             </li>
@@ -95,5 +97,6 @@
     <script src="/dashboard/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
     <!-- Main File-->
     <script src="/dashboard/js/front.js"></script>
+    @stack('scripts')
   </body>
 </html>

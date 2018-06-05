@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Seller;
+use App\Official;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
 
-class SellerController extends Controller
+class OfficialController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,14 @@ class SellerController extends Controller
      */
     public function index()
     {
-        return view('vendedores.index');
+        $officials = Official::paginate();
+        return view('officials.index', compact('officials'));
+    }
+
+    public function datosOfficial()
+    {
+        $data = DataTables::of(Official::query())->make(true);
+        return $data;
     }
 
     /**
@@ -41,10 +49,10 @@ class SellerController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Seller  $seller
+     * @param  \App\Official  $official
      * @return \Illuminate\Http\Response
      */
-    public function show(Seller $seller)
+    public function show(Official $official)
     {
         //
     }
@@ -52,10 +60,10 @@ class SellerController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Seller  $seller
+     * @param  \App\Official  $official
      * @return \Illuminate\Http\Response
      */
-    public function edit(Seller $seller)
+    public function edit(Official $official)
     {
         //
     }
@@ -64,10 +72,10 @@ class SellerController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Seller  $seller
+     * @param  \App\Official  $official
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Seller $seller)
+    public function update(Request $request, Official $official)
     {
         //
     }
@@ -75,10 +83,10 @@ class SellerController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Seller  $seller
+     * @param  \App\Official  $official
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Seller $seller)
+    public function destroy(Official $official)
     {
         //
     }
