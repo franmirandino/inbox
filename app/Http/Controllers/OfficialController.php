@@ -66,7 +66,8 @@ class OfficialController extends Controller
      */
     public function edit(Official $official)
     {
-        //
+
+        return view('officials.edit', compact('official'));
     }
 
     /**
@@ -78,7 +79,9 @@ class OfficialController extends Controller
      */
     public function update(Request $request, Official $official)
     {
-        //
+        $official->update($request->all());
+
+        return redirect()->route('officials.index')->with('info', 'Funcionario actualizado con éxito');
     }
 
     /**
