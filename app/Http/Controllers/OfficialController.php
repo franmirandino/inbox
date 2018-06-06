@@ -15,7 +15,7 @@ class OfficialController extends Controller
      */
     public function index()
     {
-        $officials = Official::paginate();
+        $officials = Official::orderBy('id', 'DESC')->paginate(5);
         return view('officials.index', compact('officials'));
     }
 
@@ -32,7 +32,7 @@ class OfficialController extends Controller
      */
     public function create()
     {
-        //
+        return view('officials.create');
     }
 
     /**
@@ -43,7 +43,8 @@ class OfficialController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $official = Official::create($request->all());
+        return redirect()->route('officials.index')->with('info', 'Funcionario agregado correctamente');
     }
 
     /**
@@ -54,7 +55,7 @@ class OfficialController extends Controller
      */
     public function show(Official $official)
     {
-        //
+        return view('officials.show', compact('official'));
     }
 
     /**
@@ -88,6 +89,9 @@ class OfficialController extends Controller
      */
     public function destroy(Official $official)
     {
-        //
+        $official->delete();
+
+        return redirect()->route('officials.index')->with('info', 'El registro fue eliminado con éxito');
+        
     }
 }

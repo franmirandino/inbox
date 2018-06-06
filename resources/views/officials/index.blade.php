@@ -14,7 +14,7 @@
 	    <div class="container-fluid">
 			<header> 
 				<h1 class="h3 display">Funcionarios</h1>
-				<a href="{{ route('funcionarios.create') }}" class="btn btn-sm btn-primary pull-right"><i class="fa fa-plus"></i> Ingresar</a>
+				<a href="{{ route('officials.create') }}" class="btn btn-sm btn-primary pull-right"><i class="fa fa-plus"></i> Ingresar</a>
 			</header>
 			<br>
 
@@ -33,7 +33,37 @@
 		                          <th>ACCIONES</th>			                                               
 		                        </tr>
 		                    </thead>
+		                    <tbody>
+		                    	@foreach($officials as $official)
+			                    	<tr>
+			                    		<td>{{ $official->id }}</td>
+			                    		<td>{{ $official->pos }}</td>
+			                    		<td>{{ $official->nombre }}</td>
+			                    		<td>{{ $official->telefono }}</td>
+			                    		<td>{{ $official->cargo }}</td>
+			                    		<td>{{ $official->canal }}</td>
+			                    		<td width="10px">
+						                    <a href="{{ route('officials.show', $official ) }}" class="btn btn-sm btn-default">
+						                      Ver
+						                    </a>
+						                </td>
+						                <td width="10px">
+						                    <a href="{{ route('officials.edit', $official ) }}" class="btn btn-sm btn-default">
+						                      Editar
+						                    </a>
+						                </td>
+						                <td width="10px">
+						                    {!! Form::open(['route' => ['officials.destroy', $official], 'method' => 'DELETE']) !!}
+							                    <button class="btn btn-sm btn-danger">
+							                	    Eliminar
+							                    </button>
+						                    {!! Form::close() !!}
+						                  </td>
+			                    	</tr>
+			                    @endforeach
+		                    </tbody>
 		                </table>
+		                {{ $officials->links() }}
 		            </div>
 		        </div>
 		    </div>
@@ -42,34 +72,3 @@
 
 
 @endsection
-
-@push('scripts')
-  	<link href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" rel="stylesheet">
-	<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-
-	<script type="text/javascript">
-	$(document).ready(function() {
-	    var table = $('#datatable').DataTable({
-	        processing: true,
-	        serverSide: true,       
-	        ajax: '{{ route('officials/getData') }}',
-	        columns: [
-	            {data: 'id', name: 'ID'},	
-	            {data: 'pos', name: 'POS'},
-	            {data: 'nombre', name: 'NOMBRE'},
-	            {data: 'telefono', name: 'TELEFONO'},
-	            {data: 'cargo', name: 'CARGO'},
-	            {data: 'canal', name: 'CANAL'},	   
-	            {defaultContent: "<button class='btn btn-sm btn-default'>Editar</button>"}	                    	           	   	                   
-	        ],
-	    });
-
-	    $('#datatable tbody').on( 'click', 'button', function () {
-	        var data = table.row( $(this).parents('tr') ).data();
-	        	 window.location.replace("funcionarios/"+data.id+"/edit");
-    	} );
-
-
-	});
-	</script>
-@endpush

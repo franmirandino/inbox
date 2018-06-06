@@ -19,7 +19,6 @@ class CreateOfficialsTable extends Migration
             $table->string('nombre')->nullable();
             $table->string('telefono')->nullable();
             $table->string('telefono_2')->nullable();
-            $table->date('fecha_nac')->nullable();
             $table->string('cargo')->nullable();
             $table->string('canal')->nullable();
             $table->timestamps();

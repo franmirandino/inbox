@@ -14,6 +14,6 @@
 Auth::routes();
 
 
-Route::resource('funcionarios', 'OfficialController');
+Route::resource('officials', 'OfficialController');
 
 Route::get('officials/getData', 'OfficialController@datosOfficial')->name('officials/getData');
