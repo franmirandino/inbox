@@ -15,7 +15,7 @@ class OfficialController extends Controller
      */
     public function index()
     {
-        $officials = Official::orderBy('id', 'DESC')->paginate(5);
+        $officials = Official::orderBy('id', 'DESC')->get();
         return view('officials.index', compact('officials'));
     }
 

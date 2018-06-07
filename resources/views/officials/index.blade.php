@@ -1,30 +1,33 @@
 @extends('layouts.layout')
 
 @section('content')
-	
-	<div class="breadcrumb-holder">
-		<div class="container-fluid">
-		  <ul class="breadcrumb">
-		    <li class="breadcrumb-item"><a href="/">Home</a></li>
-		    <li class="breadcrumb-item active">Funcionarios</li>
-		  </ul>
-		</div>
-	</div>
-	<section>
-	    <div class="container-fluid">
-			<header> 
-				<h1 class="h3 display">Funcionarios</h1>
-				<a href="{{ route('officials.create') }}" class="btn btn-sm btn-primary pull-right"><i class="fa fa-plus"></i> Ingresar</a>
-			</header>
-			<br>
 
-		  	<div class="card">
-		        <div class="card-body">
-		            <div class="table-responsive">
-		                <table id="datatable" class="table table-striped table-hover datatable">
+    <section class="content-header">
+      <h1>
+        Funcionarios
+        <small>sección para ver el listado de los funcionarios</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="/"><i class="fa fa-dashboard"></i> Inicio</a></li>
+        <li class="active">Funcionario</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+
+		  	<div class="box box-danger">
+	  			<div class="box-header"> 		  				              
+					<a href="{{ route('officials.create') }}" class="btn btn-sm btn-danger pull-right"><i class="fa fa-plus"></i> Ingresar</a>
+
+	            </div>			
+	
+		        <div class="box-body">
+
+		                <table id="funcionario" class="table table-striped table-hover">
 		                    <thead>
 		    	                <tr>
-		                          <th>ID</th>
 		                          <th>POS</th>
 		                          <th>NOMBRE</th>
 		                          <th>TELEFONO</th>
@@ -36,26 +39,24 @@
 		                    <tbody>
 		                    	@foreach($officials as $official)
 			                    	<tr>
-			                    		<td>{{ $official->id }}</td>
 			                    		<td>{{ $official->pos }}</td>
 			                    		<td>{{ $official->nombre }}</td>
 			                    		<td>{{ $official->telefono }}</td>
 			                    		<td>{{ $official->cargo }}</td>
 			                    		<td>{{ $official->canal }}</td>
-			                    		<td width="10px">
-						                    <a href="{{ route('officials.show', $official ) }}" class="btn btn-sm btn-default">
-						                      Ver
+			                    		<td>
+						                    <a href="{{ route('officials.show', $official ) }}" class="btn btn-xs btn-default">
+						                      <i class="fa fa-eye"></i>
 						                    </a>
-						                </td>
-						                <td width="10px">
-						                    <a href="{{ route('officials.edit', $official ) }}" class="btn btn-sm btn-default">
-						                      Editar
+						                
+						                    <a href="{{ route('officials.edit', $official ) }}" class="btn btn-xs btn-success	">
+						                      <i class="fa fa-pencil"></i>
 						                    </a>
-						                </td>
-						                <td width="10px">
-						                    {!! Form::open(['route' => ['officials.destroy', $official], 'method' => 'DELETE']) !!}
-							                    <button class="btn btn-sm btn-danger">
-							                	    Eliminar
+						                
+						                    <form method="POST" action="{{ route('officials.destroy', $official) }}" style="display: inline;">
+                          						{{ csrf_field() }} {{ method_field('DELETE') }}
+							                    <button class="btn btn-xs btn-warning"  >
+							                	   <i class="fa fa-times"></i>
 							                    </button>
 						                    {!! Form::close() !!}
 						                  </td>
@@ -63,12 +64,33 @@
 			                    @endforeach
 		                    </tbody>
 		                </table>
-		                {{ $officials->links() }}
-		            </div>
+
 		        </div>
 		    </div>
-	    </div>
-    </section>
+
+    </section>	
 
 
 @endsection
+
+@push('styles')
+   <link rel="stylesheet" href="/adminlte/plugins/datatables/dataTables.bootstrap.css">
+@endpush
+
+@push('script')
+  <script src="/adminlte/plugins/datatables/jquery.dataTables.min.js"></script>
+  <script src="/adminlte/plugins/datatables/dataTables.bootstrap.min.js"></script>
+
+  <script>
+    $(function () {
+      $('#funcionario').DataTable({
+        "paging": true,
+        "lengthChange": true,
+        "searching": true,
+        "ordering": true,
+        "info": true,
+        "autoWidth": true
+      });
+    });
+  </script>
+@endpush

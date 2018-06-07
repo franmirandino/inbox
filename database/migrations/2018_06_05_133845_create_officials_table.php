@@ -15,7 +15,7 @@ class CreateOfficialsTable extends Migration
     {
         Schema::create('officials', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('pos')->unique()->nullable();
+            $table->unsignedInteger('pos');
             $table->string('nombre')->nullable();
             $table->string('telefono')->nullable();
             $table->string('telefono_2')->nullable();
