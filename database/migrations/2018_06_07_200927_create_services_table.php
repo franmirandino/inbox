@@ -19,9 +19,12 @@ class CreateServicesTable extends Migration
             $table->unsignedInteger('nro_solicitud');
             $table->string('motivo');
             $table->string('cliente');
+            $table->date('fecha_orden')->nullable();
+            $table->date('fecha_cierre')->nullable();
             $table->text('observaciones_agenda');
             $table->string('lugar');
             $table->string('region');
+            $table->unsignedInteger('cierre')->nullable();
             $table->unsignedInteger('technical_id')->nullable();
             $table->timestamps();
         });

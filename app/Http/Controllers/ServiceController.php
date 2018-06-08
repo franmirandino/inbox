@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ServiceController extends Controller
 {
@@ -14,7 +16,41 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        //
+        $services = Service::orderBy('id', 'DESC')->get();
+        return view('services.index', compact('services'));
+    }
+
+    public function import()
+    {
+
+        $path = Input::file('import_file')->getRealPath();
+        
+        Excel::load($path, function($reader){
+
+            foreach ($reader->get() as $key => $row) {
+                $servicio = [
+                    'nro_servicio'          => $row['Nro. Servicio'],
+                    'nro_solicitud'         => $row['Nro. Solicitud'],
+                    'motivo'                => $row['Motivo'],
+                    'cliente'               => $row['Cliente'],
+                    'fecha_orden'           => $row['Fecha Orden'],                    
+                    'observaciones_agenda'  => $row['Observaciones Agenda'],
+                    'lugar'                 => $row['Lugar'],
+                    'region'                 => $row['Region'],
+                    
+                    
+                ];
+
+                /** Una vez obtenido los datos de la fila procedemos a registrarlos */
+                if (!empty($servicio)) {
+                    Service::create($servicio);
+                    //DB::table('productos')->insert($producto);
+                }
+            }
+
+        });
+
+        return redirect()->route('services.index')->with('info', 'Servicios agregados correctamente');
     }
 
     /**
@@ -24,7 +60,8 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        //
+        return view('services.create');
+
     }
 
     /**
