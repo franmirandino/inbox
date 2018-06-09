@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Book;
 use App\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
@@ -27,25 +28,18 @@ class ServiceController extends Controller
         
         Excel::load($path, function($reader){
 
-            foreach ($reader->get() as $key => $row) {
-                $servicio = [
-                    'nro_servicio'          => $row['Nro. Servicio'],
-                    'nro_solicitud'         => $row['Nro. Solicitud'],
-                    'motivo'                => $row['Motivo'],
-                    'cliente'               => $row['Cliente'],
-                    'fecha_orden'           => $row['Fecha Orden'],                    
-                    'observaciones_agenda'  => $row['Observaciones Agenda'],
-                    'lugar'                 => $row['Lugar'],
-                    'region'                 => $row['Region'],
-                    
-                    
-                ];
+            foreach ($reader->get() as $service) {
 
-                /** Una vez obtenido los datos de la fila procedemos a registrarlos */
-                if (!empty($servicio)) {
-                    Service::create($servicio);
-                    //DB::table('productos')->insert($producto);
-                }
+                Service::create([
+                    'nro_servicio'          => $service['nro._servicio'],
+                    'nro_solicitud'         => $service['nro._solicitud'],
+                    'motivo'                => $service['motivo'],
+                    'cliente'               => $service['cliente'],
+                    'fecha_orden'           => $service['fecha_orden'],                    
+                    'observaciones_agenda'  => $service['observaciones_agenda'],
+                    'lugar'                 => $service['lugar'],
+                    'region'                => $service['region'],                                
+                ]);
             }
 
         });

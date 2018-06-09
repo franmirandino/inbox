@@ -15,15 +15,15 @@ class CreateServicesTable extends Migration
     {
         Schema::create('services', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('nro_servicio');
-            $table->unsignedInteger('nro_solicitud');
-            $table->string('motivo');
-            $table->string('cliente');
+            $table->unsignedInteger('nro_servicio')->nullable();
+            $table->unsignedInteger('nro_solicitud')->nullable();
+            $table->string('motivo')->nullable();
+            $table->string('cliente')->nullable();
             $table->date('fecha_orden')->nullable();
             $table->date('fecha_cierre')->nullable();
-            $table->text('observaciones_agenda');
-            $table->string('lugar');
-            $table->string('region');
+            $table->text('observaciones_agenda')->nullable();
+            $table->string('lugar')->nullable();
+            $table->string('region')->nullable();
             $table->unsignedInteger('cierre')->nullable();
             $table->unsignedInteger('technical_id')->nullable();
             $table->timestamps();

@@ -16,6 +16,6 @@ Auth::routes();
 
 Route::resource('officials', 'OfficialController');
 Route::resource('services', 'ServiceController');
-Route::post('services/import', 'ServiceController@import')->name('services/import');
+Route::post('services/import', 'ServiceController@import')->name('services.import');
 
 // Route::get('officials/getData', 'OfficialController@datosOfficial')->name('officials/getData');
