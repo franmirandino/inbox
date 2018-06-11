@@ -30,6 +30,8 @@ class ServiceController extends Controller
 
             foreach ($reader->get() as $service) {
 
+                
+
                 Service::create([
                     'nro_servicio'          => $service['nro._servicio'],
                     'nro_solicitud'         => $service['nro._solicitud'],
